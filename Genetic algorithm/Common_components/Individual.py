@@ -14,13 +14,9 @@ class Individual(ABC):
         if random:
             self.phenotype= self.generate_random_phenotype()
 
-    @abstractmethod
-    def get_phenotype(self):
-        pass
 
-    @abstractmethod
-    def generate_random_phenotype(self):
-        """"
-        :returns a random phenotype
-        """
+    def get_phenotype(self):
+        return self.phenotype
+
+
 
