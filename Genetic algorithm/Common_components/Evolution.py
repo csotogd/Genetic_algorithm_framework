@@ -1,24 +1,33 @@
-from abc import ABC, abstractmethod
+
 
 from Common_components.Crossover import Crossover
 from Common_components.Mutator import Mutator
 from Common_components.Population import Population
 
 
-class Genetic_process(ABC):
+class Genetic_process():
 
-    def __init__(self, configuration):
+    def __init__(self, configuration, population_size):
         self.population= None
         self.prob_assigner = configuration.prob_assigner
         self.crossover_obj = configuration.crossover_obj
         self.mutator = configuration.mutator
         self.fitness_obj = configuration.fitness_obj
+        self.ind_factory = configuration.individual_factory
+        self.population_size = population_size
 
+
+
+    def optimize(self, nr_iterations):
+        self.population =Population().create_first_population(self.population_size)
+
+        for i in range(nr_iterations):
+            self.fitness_obj.calculate_fitness_population(self.population)
+            self.produce_next_gen()
 
 
 
     def produce_next_gen(self):
-        self.fitness_obj.calculate_fitness_population(self.population)
         selected_indi = self.select_individuals_for_reproduction()
         new_population = self.reproduce(selected_indi)
         self.population= new_population
@@ -73,3 +82,8 @@ class Genetic_process(ABC):
         """
         return 0
 
+
+if __name__ == '__main__':
+        #process= Genetic_process()
+        #process.optimize()
+    print('done')

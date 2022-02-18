@@ -15,6 +15,12 @@ class Population(ABC):
     def fitness_function(self):
         pass
 
+    def create_first_population(self, size, ind_factory):
+        """Generates a ppopulation randomly that corresponds to this object"""
+        for i in range(size):
+            ind = ind_factory.create_random_individual()
+            self.individuals[ind.id]=ind
+
     def get_size(self):
         return len(self.individuals)
 
@@ -25,8 +31,5 @@ class Population(ABC):
         pop_score =sum([individual.fitness_score for individual in self.individuals.values()])
         return pop_score
 
-    def generate_first_population(self, size):
-        for i in range(size):
-            ind = Individual(phenotype= None, random=True)
-            self.individuals[ind.id]=ind
+
 
