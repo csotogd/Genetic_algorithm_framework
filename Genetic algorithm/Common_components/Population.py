@@ -18,7 +18,7 @@ class Population(ABC):
     def create_first_population(self, size, ind_factory):
         """Generates a ppopulation randomly that corresponds to this object"""
         for i in range(size):
-            ind = ind_factory.create_random_individual()
+            ind = ind_factory.create_random_individual(n=size)
             self.individuals[ind.id]=ind
 
     def get_size(self):
