@@ -42,8 +42,8 @@ class Genetic_process(ABC):
 
         new_population = Population()
 
-        for i in range(self.population.get_size()*2): #new population will have same length as old one
-            (father, mother) =self.select_pair(selected_indi)
+        for i in range(self.population.get_size()): #new population will have same length as old one
+            father, mother =self.select_pair(selected_indi)
             descendant = self.crossover_obj.crossover(father, mother)
             descendant = self.mutator.mutate(descendant, rate)
             new_population.add_individual(descendant)
