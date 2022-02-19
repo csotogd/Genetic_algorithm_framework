@@ -34,4 +34,5 @@ class Population():
             if individual.fitness_score> max_f and fitness_obj.test_solution_is_feasible(individual):
                 max_f = individual.fitness_score
                 max_ind = individual
+        return max_ind
 

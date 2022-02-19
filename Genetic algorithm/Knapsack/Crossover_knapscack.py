@@ -2,6 +2,10 @@ from Common_components.Crossover import Crossover
 import copy
 import random
 
+from Common_components.Individual import Individual
+from Knapsack.Phenotype_kanpsack import Phenotype_kanpsack
+
+
 class Crossover_Knapsack(Crossover):
 
 
@@ -25,16 +29,31 @@ class Crossover_Knapsack(Crossover):
         001   1001110
 
         then we choose one of them both randomly
-        """
 
-        descendant = copy.deepcopy(father)
-        #TODO check that this is also copying all inner objects
+        :returns a descendant object
+        """
 
         splitting_point = random.randint(0, len(father.phenotype.included))
         offspring_1 = father.phenotype.included[:splitting_point] + mother.phenotype.included[splitting_point:]
         offspring_2 = mother.phenotype.included[:splitting_point] + father.phenotype.included[splitting_point:]
         idx = random.randint(0,1)
 
-        return [offspring_1, offspring_2][idx]
+        included = [offspring_1, offspring_2][idx]
+        descendant =self.create_new_individual(included, father)
+        return descendant
 
+    def create_new_individual(self, included, father):
+        """
+
+        :param included: a list of 1s and 0 indicating whether a gene is contained or not
+        :param father: an individual user that will be used to clone
+        :return: a descendant containing included in its phenotype
+        """
+
+        descendant = copy.deepcopy(father)
+        descendant.id = Individual.id
+        Individual.id+=1
+        phenotype = Phenotype_kanpsack(included)
+        descendant.phenotype =phenotype
+        return descendant
     #TODO try out different crossover techniques

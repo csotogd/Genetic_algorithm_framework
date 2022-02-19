@@ -1,6 +1,7 @@
 import random
 
 class Mutator_knapsack:
+
     def __init__(self, rate):
         self.rate=rate
 
@@ -10,9 +11,9 @@ class Mutator_knapsack:
 
         individual is an individual object
         """
-        self.random = random
-        if self.random.random()<self.rate:
-            idx = random.randint(0, len(individual.phenotype.included))
+
+        if random.random()<self.rate:
+            idx = random.randint(0, len(individual.phenotype.included)-1)
             if individual.phenotype.included[idx]== 0:
                 individual.phenotype.included[idx]=1
             else:

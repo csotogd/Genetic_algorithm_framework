@@ -28,7 +28,7 @@ class Genetic_search():
             self.produce_next_gen()
 
         self.fitness_obj.calculate_fitness_population(self.population)
-        most_fitted = self.population.get_most_fitted_indiviual(self.fitness_obj, feasible = True )
+        most_fitted = self.population.get_most_fitted_individual(self.fitness_obj, feasible = True )
         print('The most fitted individual is: ', most_fitted.phenotype.to_string())
 
 
@@ -49,7 +49,6 @@ class Genetic_search():
         for i in range(self.population.get_size()): #new population will have same length as old one
             father, mother =self.parents_selector.select_parents(self.population)
             descendant = self.crossover_obj.crossover(father, mother)
-            descendant = self.mutator.mutate(descendant, rate)
             self.mutator.mutate(descendant)
             new_population.add_individual(descendant)
 

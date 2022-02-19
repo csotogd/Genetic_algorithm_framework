@@ -13,7 +13,7 @@ class Fitness_calculator_knapsack(Fitness_calculator):
         :param individual:
         :return: the fitness score
         """
-        individual.fitness_score= self.calculate_fitness_square_violated(individual)
+        individual.fitness_score= self.calculate_fitness_linear_violated(individual)
         return individual.fitness_score
 
     def calculate_fitness_square_violated(self, individual):
@@ -26,7 +26,7 @@ class Fitness_calculator_knapsack(Fitness_calculator):
 
     def calculate_fitness_linear_violated(self, individual):
         """"
-        The score is the value minus the amount of capacity violation
+        The score is the value minus the amount of capacity violation.
         """""
 
         violation = individual.phenotype.weight - self.capacity
