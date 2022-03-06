@@ -12,9 +12,10 @@ class CrossoverTSP(Crossover):
         :returns descendant
         """
         # res= self.order_one_crossover_method(father=father.phenotype.route, mother=mother.phenotype.route)[0]
-        res = Individual(PhenotypeTSP(self.cxOrdered(ind1=father.phenotype.route, ind2=mother.phenotype.route)[0]))
+        # res = Individual(PhenotypeTSP(self.cxOrdered(ind1=father.phenotype.route, ind2=mother.phenotype.route)[0]))
+        # res = Individual(PhenotypeTSP(self.cxPartialyMatched(ind1=father.phenotype.route, ind2=mother.phenotype.route)[0]))
+        res = Individual(PhenotypeTSP(self.cycle_crossover(parent_one=father.phenotype.route, parent_two=mother.phenotype.route)[0]))
         return res
-
 
     def crossover_from_paper(self, father, mother):
         tracko1 = father.copy()
@@ -83,6 +84,10 @@ class CrossoverTSP(Crossover):
 
         return Individual(PhenotypeTSP(child))
 
+    """
+        Source: https://github.com/DEAP/deap/blob/master/deap/tools/crossover.py
+    """
+
     def cxOrdered(self, ind1, ind2):
         """Executes an ordered crossover (OX) on the input
         individuals. The two individuals are modified in place. This crossover
@@ -130,6 +135,110 @@ class CrossoverTSP(Crossover):
             ind1[i], ind2[i] = ind2[i], ind1[i]
 
         return ind1, ind2
+
+    """
+        Source: https://github.com/DEAP/deap/blob/master/deap/tools/crossover.py
+    """
+
+    def cxPartialyMatched(self, ind1, ind2):
+        """Executes a partially matched crossover (PMX) on the input individuals.
+        The two individuals are modified in place. This crossover expects
+        :term:`sequence` individuals of indices, the result for any other type of
+        individuals is unpredictable.
+        :param ind1: The first individual participating in the crossover.
+        :param ind2: The second individual participating in the crossover.
+        :returns: A tuple of two individuals.
+        Moreover, this crossover generates two children by matching
+        pairs of values in a certain range of the two parents and swapping the values
+        of those indexes. For more details see [Goldberg1985]_.
+        This function uses the :func:`~random.randint` function from the python base
+        :mod:`random` module.
+        .. [Goldberg1985] Goldberg and Lingel, "Alleles, loci, and the traveling
+           salesman problem", 1985.
+        """
+        size = min(len(ind1), len(ind2))
+        p1, p2 = [0] * size, [0] * size
+
+        # Initialize the position of each indices in the individuals
+        for i in range(size):
+            p1[ind1[i]] = i
+            p2[ind2[i]] = i
+        # Choose crossover points
+        cxpoint1 = random.randint(0, size)
+        cxpoint2 = random.randint(0, size - 1)
+        if cxpoint2 >= cxpoint1:
+            cxpoint2 += 1
+        else:  # Swap the two cx points
+            cxpoint1, cxpoint2 = cxpoint2, cxpoint1
+
+        # Apply crossover between cx points
+        for i in range(cxpoint1, cxpoint2):
+            # Keep track of the selected values
+            temp1 = ind1[i]
+            temp2 = ind2[i]
+            # Swap the matched value
+            ind1[i], ind1[p1[temp2]] = temp2, temp1
+            ind2[i], ind2[p2[temp1]] = temp1, temp2
+            # Position bookkeeping
+            p1[temp1], p1[temp2] = p1[temp2], p1[temp1]
+            p2[temp1], p2[temp2] = p2[temp2], p2[temp1]
+
+        return ind1, ind2
+
+    """
+    Adapted from: https://codereview.stackexchange.com/questions/226179/easiest-way-to-implement-cycle-crossover
+    """
+    def cycle_crossover(self, parent_one, parent_two):
+        chrom_length = len(parent_one)
+        p1_copy = parent_one.copy()
+        p2_copy = parent_two.copy()
+        child_one = [-1] * chrom_length
+        child_two = [-1] * chrom_length
+        swap = True
+        count = 0
+        pos = 0
+
+        while True:
+            if count > chrom_length:
+                break
+            for i in range(chrom_length):
+                if child_one[i] == -1:
+                    pos = i
+                    break
+
+            if swap:
+                while True:
+                    child_one[pos] = parent_one[pos]
+                    count += 1
+                    pos = parent_two.index(parent_one[pos])
+                    if p1_copy[pos] == -1:
+                        swap = False
+                        break
+                    p1_copy[pos] = -1
+            else:
+                while True:
+                    child_one[pos] = parent_two[pos]
+                    count += 1
+                    pos = parent_one.index(parent_two[pos])
+                    if p2_copy[pos] == -1:
+                        swap = True
+                        break
+                    p2_copy[pos] = -1
+
+        for i in range(chrom_length):  # for the second child
+            if child_one[i] == parent_one[i]:
+                child_two[i] = parent_two[i]
+            else:
+                child_two[i] = parent_one[i]
+
+        for i in range(chrom_length):  # Special mode
+            if child_one[i] == -1:
+                if p1_copy[i] == -1:  # it means that the ith gene from p1 has been already transfered
+                    child_one[i] = parent_two[i]
+                else:
+                    child_one[i] = parent_one[i]
+
+        return child_one, child_two
 
 
 if __name__ == "__main__":
