@@ -15,9 +15,9 @@ if __name__ == '__main__':
 
     crossover = Crossover_Knapsack()
     fitness_obj = Fitness_calculator_knapsack( capacity = 20 )
-    factory= Ind_factort_knapsack()
+    factory = Ind_factort_knapsack()
     parents_selector = Parents_selector()
-    mutator = Mutator_knapsack(rate= 0.1)
+    mutator = Mutator_knapsack(rate= mutation_rate)
 
     population = Population()
     population.create_first_population(size_pop=pop_size, ind_factory=factory, n = 10)
