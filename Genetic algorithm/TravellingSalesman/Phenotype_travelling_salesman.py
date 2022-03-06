@@ -43,12 +43,15 @@ class PhenotypeTSP():
         print('distance between of the best route is: ', PhenotypeTSP.calculate_distance_of_best_route(best_route, cities))
 
     @staticmethod
-    def calculate_distance_of_best_route(path, distances):
+    def calculate_distance_of_best_route(path, distances=None):
         """
             :param path: list of nodes in sequence
             :param distances: n x n matrix of distance from city i to j
             :return: float of the total distance of the overall path (TSP solution)
             """
+        if(distances is None):
+            distances = PhenotypeTSP.distances
+
         path = [int(i) for i in path]
         total_distance = 0
         number_of_cities = len(path)
