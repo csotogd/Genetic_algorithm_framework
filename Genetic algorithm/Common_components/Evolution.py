@@ -3,6 +3,7 @@
 from Common_components.Crossover import Crossover
 from Common_components.Mutator import Mutator
 from Common_components.Population import Population
+from tqdm import tqdm
 
 
 class Genetic_search():
@@ -23,7 +24,7 @@ class Genetic_search():
 
     def optimize(self, nr_iterations):
 
-        for i in range(nr_iterations):
+        for i in tqdm(range(nr_iterations)):
             self.fitness_obj.calculate_fitness_population(self.population)
             self.produce_next_gen()
 
