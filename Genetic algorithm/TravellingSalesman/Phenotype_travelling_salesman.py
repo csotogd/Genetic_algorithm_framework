@@ -13,7 +13,8 @@ class PhenotypeTSP():
     distances = []
 
     def to_string(self):
-        return 'Route:' + str(self.route) + ' with distance: ' + str(PhenotypeTSP.calculate_distance_of_best_route(self.route, PhenotypeTSP.distances))
+        return 'Route:' + str(self.route) + ' with distance: ' + str(
+            PhenotypeTSP.calculate_distance_of_best_route(self.route, PhenotypeTSP.distances))
 
     def __init__(self, route):
         self.route = route
@@ -21,10 +22,8 @@ class PhenotypeTSP():
     @staticmethod
     def initialize_common_info(n):
         degrees = []
-        route = [str(x) for x in range(n)]
         for p in range(n):
-            degrees.append(p*(360.0/n))
-
+            degrees.append(p * (360.0 / n))
 
         cities = np.zeros((n, n))
         for i in range(n):
@@ -42,7 +41,7 @@ class PhenotypeTSP():
             :param distances: n x n matrix of distance from city i to j
             :return: float of the total distance of the overall path (TSP solution)
             """
-        if(distances is None):
+        if (distances is None):
             distances = PhenotypeTSP.distances
 
         path = [int(i) for i in path]
@@ -56,5 +55,6 @@ class PhenotypeTSP():
 
         return total_distance
 
-if __name__ =="__main__":
+
+if __name__ == "__main__":
     print(calculate_distance_between_cities(180))

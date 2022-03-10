@@ -24,7 +24,7 @@ class Genetic_search():
 
     def optimize(self, nr_iterations):
 
-        for i in tqdm(range(nr_iterations)):
+        for i in range(nr_iterations):
             self.fitness_obj.calculate_fitness_population(self.population)
             self.produce_next_gen()
 
