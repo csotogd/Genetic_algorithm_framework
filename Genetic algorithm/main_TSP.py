@@ -44,4 +44,4 @@ if __name__ == '__main__':
                     tmp_df = pd.DataFrame(columns=column_names, data=[[rate, iteration, pop, size, np.mean(results)]])
                     df = pd.concat([df,tmp_df], ignore_index=True)
         print('Done with mutation rate: ', rate)
-    df.to_csv(r'TSP_results.csv', index=False, header=True)
+    df.to_csv(r'TSP_results_cycle_crossover.csv', index=False, header=True)

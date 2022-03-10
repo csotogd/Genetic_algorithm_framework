@@ -11,7 +11,7 @@ class Phenotype_kanpsack:
         weight= 0
         for i in range(len(self.included)):
             if self.included[i]==1:
-                value+= Phenotype_kanpsack.packages[i].value
+                value += Phenotype_kanpsack.packages[i].value
                 weight+=Phenotype_kanpsack.packages[i].weight
         return value, weight
 
