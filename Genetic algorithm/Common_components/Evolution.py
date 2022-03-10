@@ -30,7 +30,8 @@ class Genetic_search():
 
         self.fitness_obj.calculate_fitness_population(self.population)
         most_fitted = self.population.get_most_fitted_individual(self.fitness_obj, feasible = True )
-        print('The most fitted individual is: ', most_fitted.phenotype.to_string())
+        # print('The most fitted individual is: ', most_fitted.phenotype.to_string())
+        return most_fitted.fitness_score
 
 
 
