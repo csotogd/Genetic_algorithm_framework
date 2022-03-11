@@ -8,8 +8,7 @@ from TravellingSalesman.Individual_factory_TSP import Individual_factory_TSP
 from TravellingSalesman.Mutator_travelling_salesman import Mutator_TSP
 import numpy as np
 import pandas as pd
-import tqdm as tqdm
-
+import time
 if __name__ == '__main__':
     mutation_rate = np.arange(0.0, 1.0, 0.05).tolist()
     iterations = [10, 100, 1000]
@@ -24,6 +23,7 @@ if __name__ == '__main__':
 
     column_names = ['mutation_rate', 'iterations_number', 'population_size', ' number_of_cities', 'average_solution_distance']
     df = pd.DataFrame(columns=column_names)
+    start = time.time()
 
     for rate in mutation_rate:
         for iteration in iterations:
@@ -44,4 +44,6 @@ if __name__ == '__main__':
                     tmp_df = pd.DataFrame(columns=column_names, data=[[rate, iteration, pop, size, np.mean(results)]])
                     df = pd.concat([df,tmp_df], ignore_index=True)
         print('Done with mutation rate: ', rate)
+    end = time.time()
+    print('time took: ', end - start)
     df.to_csv(r'TSP_results_cycle_crossover.csv', index=False, header=True)

@@ -1,3 +1,5 @@
+import time
+
 from Common_components.Configuration import Configuration
 from Common_components.Evolution import Genetic_search
 from Common_components.Population import Population
@@ -17,12 +19,12 @@ if __name__ == '__main__':
     size_of_individuals_phenotype = [10, 100, 1000]
     number_of_parameters_to_test = 20*3*3*3
     blah = 0
-    number_of_samples_per_combinations_of_parameters = 100
+    number_of_samples_per_combinations_of_parameters = 10
 
     column_names = ['mutation_rate', 'iterations_number', 'population_size', ' number_of_cities',
                     'average_solution_distance']
     df = pd.DataFrame(columns=column_names)
-
+    start = time.time()
     for rate in mutation_rate:
         for iteration in iterations:
             for pop in pop_size:
@@ -44,6 +46,7 @@ if __name__ == '__main__':
                     df = pd.concat([df, tmp_df], ignore_index=True)
                 blah = blah +1
                 print('Completed number of parameters:', blah ,'/', number_of_parameters_to_test)
-
+    end = time.time()
+    print('time took: ', end-start)
     df.to_csv(r'Knapsack_results_calculate_fitness_linear_violated.csv', index=False, header=True)
 
