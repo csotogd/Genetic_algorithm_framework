@@ -13,14 +13,13 @@ import pandas as pd
 import os
 
 if __name__ == '__main__':
-    mutation_rate = np.arange(0.0, 1.0, 0.05).tolist()
-    iterations = [10, 100, 1000]
-    pop_size = [10, 100, 1000]
-    size_of_individuals_phenotype = [10, 100, 1000]
+    mutation_rate = np.arange(0.0, 1.0, 0.1).tolist()
+    iterations = [10, 100, 200]
+    pop_size = [10, 100, 200]
+    size_of_individuals_phenotype = [10, 100, 200]
     number_of_parameters_to_test = 20*3*3*3
     blah = 0
-    number_of_samples_per_combinations_of_parameters = 10
-
+    number_of_samples_per_combinations_of_parameters = 5
     column_names = ['mutation_rate', 'iterations_number', 'population_size', ' number_of_cities',
                     'average_solution_distance']
     df = pd.DataFrame(columns=column_names)

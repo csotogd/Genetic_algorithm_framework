@@ -10,11 +10,11 @@ import numpy as np
 import pandas as pd
 import time
 if __name__ == '__main__':
-    mutation_rate = np.arange(0.0, 1.0, 0.05).tolist()
-    iterations = [10, 100, 1000]
-    pop_size = [10, 100, 1000]
-    size_of_individuals_phenotype = [10, 100, 1000]
-    number_of_samples_per_combinations_of_parameters = 100
+    mutation_rate = np.arange(0.0, 1.0, 0.1).tolist()
+    iterations = [10, 100, 200]
+    pop_size = [10, 100, 200]
+    size_of_individuals_phenotype = [10, 100, 200]
+    number_of_samples_per_combinations_of_parameters = 5
 
     # mutation_rate = 0.05
     # nr_iterations = 1000

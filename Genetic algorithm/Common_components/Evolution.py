@@ -33,6 +33,7 @@ class Genetic_search():
         # print('The most fitted individual is: ', most_fitted.phenotype.to_string())
         if most_fitted is None:
             return 0.0
+
         else:
             return most_fitted.fitness_score
 
