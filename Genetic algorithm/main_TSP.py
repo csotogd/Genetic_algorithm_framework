@@ -17,8 +17,8 @@ if __name__ == '__main__':
     number_of_samples_per_combinations_of_parameters = 5
 
     # mutation_rate = 0.05
-    # nr_iterations = 1000
-    # pop_size = 1000
+    # iterations = 10
+    # pop_size = 10
     # size_of_individuals_phenotype = 1000
 
     column_names = ['mutation_rate', 'iterations_number', 'population_size', ' number_of_cities', 'average_solution_distance']

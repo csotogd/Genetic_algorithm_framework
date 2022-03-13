@@ -23,19 +23,30 @@ class Genetic_search():
 
 
     def optimize(self, nr_iterations):
-
+        most_fitted = None
         for i in range(nr_iterations):
             self.fitness_obj.calculate_fitness_population(self.population)
+            tmp = self.population.get_most_fitted_individual(self.fitness_obj, feasible=True)
+            most_fitted = self.fittest(most_fit_so_far=most_fitted, tmp=tmp)
             self.produce_next_gen()
 
         self.fitness_obj.calculate_fitness_population(self.population)
-        most_fitted = self.population.get_most_fitted_individual(self.fitness_obj, feasible = True )
-        # print('The most fitted individual is: ', most_fitted.phenotype.to_string())
+        tmp = self.population.get_most_fitted_individual(self.fitness_obj, feasible = True )
+        most_fitted = self.fittest(most_fit_so_far=most_fitted, tmp=tmp)
         if most_fitted is None:
             return 0.0
-
         else:
             return most_fitted.fitness_score
+
+    def fittest(self, most_fit_so_far, tmp):
+        if tmp is None:
+            return most_fit_so_far
+        elif most_fit_so_far is None:
+            return tmp
+        elif most_fit_so_far.fitness_score < tmp.fitness_score:
+            return tmp
+        else:
+            return most_fit_so_far
 
 
 
