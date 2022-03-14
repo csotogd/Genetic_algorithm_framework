@@ -19,9 +19,6 @@ class Genetic_search():
         self.population_size = population_size
 
 
-
-
-
     def optimize(self, nr_iterations):
         most_fitted = None
         for i in range(nr_iterations):

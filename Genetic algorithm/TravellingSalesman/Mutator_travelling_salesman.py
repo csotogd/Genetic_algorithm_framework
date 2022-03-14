@@ -10,7 +10,6 @@ class Mutator_TSP:
 
     def mutate(self, individual):
         """mutates the individual with probability rate.
-        mutation is just flipping one random bit from 0 to 1 or vice versa
 
         individual is an individual object
         """

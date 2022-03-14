@@ -1,7 +1,9 @@
 import pandas as pd
 from matplotlib import pyplot as plt
 
-df = pd.read_csv(r'TSP_results_cycle_crossover.csv')
+# df = pd.read_csv(r'TSP_results_cycle_crossover.csv')
+# df = pd.read_csv(r'TSP_results_order_one_crossover_method.csv')
+df = pd.read_csv(r'Knapsack_results_calculate_fitness_linear_violated.csv')
 
 # diagram of aggregated by mutation rate, to see the overall best mutation rate for all of our runs
 mean_df = df.groupby('mutation_rate').agg('mean')

@@ -54,7 +54,7 @@ class Parents_selector:
         #get minimum of all fitness scores
         minimum_f_score = 99999
         for ind in population.individuals.keys():
-            if minimum_f_score>  population.individuals[ind].fitness_score:
+            if minimum_f_score >  population.individuals[ind].fitness_score:
                 minimum_f_score = population.individuals[ind].fitness_score
 
         if minimum_f_score<0:

@@ -14,7 +14,7 @@ class CrossoverTSP(Crossover):
         # res= self.order_one_crossover_method(father=father.phenotype.route, mother=mother.phenotype.route)[0]
         # res = Individual(PhenotypeTSP(self.cxOrdered(ind1=father.phenotype.route, ind2=mother.phenotype.route)[0]))
         # res = Individual(PhenotypeTSP(self.cxPartialyMatched(ind1=father.phenotype.route, ind2=mother.phenotype.route)[0]))
-        res = Individual(PhenotypeTSP(self.cycle_crossover(parent_one=father.phenotype.route, parent_two=mother.phenotype.route)[0]))
+        res = Individual(PhenotypeTSP(self.order_one_crossover_method(father.phenotype.route, mother.phenotype.route)[0]))
         return res
 
     def crossover_from_paper(self, father, mother):
@@ -82,7 +82,7 @@ class CrossoverTSP(Crossover):
                 child.append(parent[t])
             t += 1
 
-        return Individual(PhenotypeTSP(child))
+        return child
 
     """
         Source: https://github.com/DEAP/deap/blob/master/deap/tools/crossover.py
