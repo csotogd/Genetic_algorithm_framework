@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     for rate in mutation_rate:
         for iteration in iterations:
-            for pop in pop_size:
+            for pop in pop_size: #I think you should comment this out for the genetic
                 for size in size_of_individuals_phenotype:
                     results = []
                     for i in range(number_of_samples_per_combinations_of_parameters):

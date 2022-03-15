@@ -8,6 +8,8 @@ class Ind_factort_knapsack(Individual_factory):
 
     def create_random_individual(self, n=0):
         Phenotype_kanpsack.initialize_common_info(n)
+        #Phenotype_kanpsack.initialize_common_info_deterministic_1(n)
+        #Phenotype_kanpsack.initialize_common_info_deterministic_2(n)
         included = self.__select_packages_ids_for_individual(n)
         phenotype = Phenotype_kanpsack( included)
         return Individual(phenotype)

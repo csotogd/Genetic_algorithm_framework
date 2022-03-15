@@ -1,6 +1,9 @@
 import random
 class Phenotype_kanpsack:
     packages={} #this info is common to all phenotypes so we make it static
+
+
+
     def __init__(self, included):
         self.included = included #list of eithet 0 and ones, where 0 at index i represents that package with index i is not included
         self.value, self.weight = self.calculate_total_value_weight()
@@ -29,6 +32,28 @@ class Phenotype_kanpsack:
             Phenotype_kanpsack.packages[value]= package
 
 
+    @staticmethod
+    def  initialize_common_info_deterministic_1(n):
+        """we initialize the inmutable info that is common to all genotype
+        n has to be less or equal to 10
+        """
+        weights =[3,4,7,1,8,9,3,1,2,5]
+        for value in range(n):
+            weight = weights[value]
+            package = Package(weight, value)
+            Phenotype_kanpsack.packages[value]= package
+
+    @staticmethod
+    def  initialize_common_info_deterministic_1(n):
+        """we initialize the inmutable info that is common to all genotype
+        n has to be less or equal to 10
+
+        """
+        weights =[2,7,1,5,6,4,3,5,8,9]
+        for value in range(n):
+            weight = weights[value]
+            package = Package(weight, value)
+            Phenotype_kanpsack.packages[value]= package
 
 
 class Package:
